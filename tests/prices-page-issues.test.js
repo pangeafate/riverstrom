@@ -79,7 +79,7 @@ describe('Prices Page Issues - After Fix', () => {
                 const content = fs.readFileSync(pricesIndexPath, 'utf8');
                 
                 // Check that correct pricing is shown
-                expect(content).toContain('от 480.000 руб.');
+                expect(content).toContain('от 525.000 руб.');
                 
                 // Verify that the old incorrect price is NOT present
                 expect(content).not.toContain('625.000 руб.');

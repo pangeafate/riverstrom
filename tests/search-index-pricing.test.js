@@ -8,7 +8,7 @@ describe('Search Index Pricing Tests', () => {
     const path = require('path');
     
     describe('Search Index JSON files should have correct pricing', () => {
-        test('should contain correct price "от 480.000 руб." not "625.000 руб." in assets/scripts/searchIndex', () => {
+        test('should contain correct price "от 525.000 руб." not "625.000 руб." in assets/scripts/searchIndex', () => {
             const searchIndexPath = path.join(process.cwd(), 'assets', 'scripts', 'searchIndex-xj-AT2gnOGEQ.json');
             
             if (fs.existsSync(searchIndexPath)) {
@@ -18,7 +18,7 @@ describe('Search Index Pricing Tests', () => {
                 expect(content).not.toContain('625.000 руб.');
                 
                 // Should contain correct price
-                expect(content).toContain('от 480.000 руб.');
+                expect(content).toContain('от 525.000 руб.');
                 
                 // Should contain the AI station price 
                 expect(content).toContain('2.850.000 руб.');
@@ -27,7 +27,7 @@ describe('Search Index Pricing Tests', () => {
             }
         });
         
-        test('should contain correct price "от 480.000 руб." not "625.000 руб." in assets/searchIndex', () => {
+        test('should contain correct price "от 525.000 руб." not "625.000 руб." in assets/searchIndex', () => {
             const searchIndexPath = path.join(process.cwd(), 'assets', 'searchIndex-xj-AT2gnOGEQ.json');
             
             if (fs.existsSync(searchIndexPath)) {
@@ -37,7 +37,7 @@ describe('Search Index Pricing Tests', () => {
                 expect(content).not.toContain('625.000 руб.');
                 
                 // Should contain correct price
-                expect(content).toContain('от 480.000 руб.');
+                expect(content).toContain('от 525.000 руб.');
                 
                 // Should contain the AI station price 
                 expect(content).toContain('2.850.000 руб.');
