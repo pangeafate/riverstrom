@@ -1,0 +1,296 @@
+{
+  "name": "riverstrom-ai form workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "contact-form",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "455850a2-7c01-4b92-92e9-f48c52273856",
+      "name": "Webhook",
+      "webhookId": "f8405f15-d0ea-475f-93c0-4dc96c5f3473"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c118f54e-5acf-4a55-9c18-af5f00de7971",
+              "name": "name",
+              "value": "={{\n  [$json.body?.firstName, $json.body?.lastName]\n    .filter(v => !!v && v.toString().trim())\n    .join(' ')\n    .trim()\n}}\n",
+              "type": "string"
+            },
+            {
+              "id": "41ac94da-a750-444c-8b96-1f262dac86d0",
+              "name": "email",
+              "value": "={{ ($json.body?.email ?? '').toString().trim().toLowerCase() }}\n",
+              "type": "string"
+            },
+            {
+              "id": "67fe7bcb-d6bf-4372-910a-ba1e573134fc",
+              "name": "message",
+              "value": "={{ ($json.body?.message ?? '').toString().trim() }}\n",
+              "type": "string"
+            },
+            {
+              "id": "7a591243-9dd0-41f1-867e-6ad0f323e3d6",
+              "name": "referer",
+              "value": "={{ $json.body?.referer ?? $json.headers?.referer ?? $json.headers?.origin ?? '' }}\n\n",
+              "type": "string"
+            },
+            {
+              "id": "299d4d71-c009-43c4-919d-ba9abf8b0e9e",
+              "name": "company",
+              "value": "={{ ($json.body?.company ?? '').toString().trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "86faa63f-c9d6-4969-af5c-ac88755b4c18",
+              "name": "city",
+              "value": "={{ ($json.body?.city ?? '').toString().trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "8ac8a9b1-8a66-44f8-970c-5a122de4afff",
+              "name": "website",
+              "value": "={{ ($json.body?.website ?? '').toString().trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "b7c8d9e0-9f87-4c89-a8d2-6e5f4a3b2c1d",
+              "name": "promoCode",
+              "value": "={{ ($json.body?.promoCode ?? '').toString().trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "a941d3ca-fb8b-40b6-a6d1-ff43d3a5b13e",
+              "name": "=ip",
+              "value": "={{ $json.headers?.['x-forwarded-for'] ?? $json.headers?.['cf-connecting-ip'] ?? '' }}",
+              "type": "string"
+            },
+            {
+              "id": "6c690e8b-061f-4e51-9646-4443f78b0ba1",
+              "name": "ua",
+              "value": "={{ $json.headers?.['user-agent'] ?? '' }}",
+              "type": "string"
+            },
+            {
+              "id": "9c2547eb-c6dd-4f96-8d8a-74dcefa86905",
+              "name": "redirect",
+              "value": "={{ (function () {   const raw =     $json.body?.returnUrl ||     $json.headers?.referer ||     $json.headers?.origin ||     'https://waimaozi.github.io/riverstrom-pics-fixed/contact';   const base = String(raw).replace(/[\\r\\n]/g, '').trim();   const sep = base.includes('?') ? '&' : '?';   return base + sep + 'thanks=1'; })() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        0
+      ],
+      "id": "df0371da-4cd1-424d-ad72-d16613cee14b",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8361346d-c071-4bbc-9518-228ac340af97",
+              "leftValue": "={{ ($json.website ?? '').trim() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "b60cdd52-a668-4791-84b3-394748361566",
+              "leftValue": "={{ ($json.email ?? '').trim() }}",
+              "rightValue": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            },
+            {
+              "id": "74b8d34c-2650-4688-86c2-58f2936a1a5f",
+              "leftValue": "={{ ($json.name ?? '').trim() }}\n",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "9f89265f-3fc7-431c-95c4-0988d12109a9",
+              "leftValue": "={{ ($json.message ?? '').trim() }}\n",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        0
+      ],
+      "id": "972ef59e-07e9-4088-8069-d161fcfc2ab8",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        672,
+        112
+      ],
+      "id": "9b428433-6a13-45bb-a1f9-34bdd2da227c",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "chatId": "-1002960746192",
+        "text": "=Новая заявка с сайта:\n<b>Имя:</b> {{$json.name}}\n<b>Email:</b> {{$json.email}}\n{{ $json.company ? `<b>Компания:</b> ${$json.company}` : '' }}\n{{ $json.city ? `<b>Город:</b> ${$json.city}` : '' }}\n<b>Сообщение:</b> {{$json.message}}\n{{ $json.promoCode ? `<b>Промокод:</b> ${$json.promoCode}` : '' }}\n\n<i>Страница:</i> {{$json.referer}}\n<i>IP:</i> {{$json.ip}}\n<i>UA:</i> {{$json.ua}}\n",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        672,
+        -96
+      ],
+      "id": "19bbc074-230d-423d-9a8f-e93a2d37fb2b",
+      "name": "Send a text message",
+      "webhookId": "dfdfabfc-1990-4a5b-a517-af55c9ca5ab1",
+      "credentials": {
+        "telegramApi": {
+          "id": "Lr6LckQQQ5nmBmj2",
+          "name": "PangeaFetch"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{\n'<!doctype html><html><meta charset=\"utf-8\">' +\n'<meta http-equiv=\"refresh\" content=\"0;url=' +\nString(\n  $json.redirect ||\n  $item(0).$node[\"Edit Fields\"].json.redirect ||\n  \"https://waimaozi.github.io/riverstrom-pics-fixed/contact?thanks=1\"\n).replace(/[\"<>]/g,'') +\n'\"><title>Спасибо!</title>' +\n'<body style=\"font:16px/1.4 -apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:24px\">' +\n'Мы с вами свяжемся, спасибо!' +\n'</body></html>'\n}}\n",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "=text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        880,
+        -96
+      ],
+      "id": "4541ed25-05c4-429f-a5ce-be642958594a",
+      "name": "Respond to Webhook1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e24daef4-c269-4f6a-bf72-93d351fcb938",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d8d0f3a1b5452865880018369d00dbc23f6a859a8ab8f3d9720659ce3799163c"
+  },
+  "id": "ugIJ2iHUeGZgxbUp",
+  "tags": []
+}
