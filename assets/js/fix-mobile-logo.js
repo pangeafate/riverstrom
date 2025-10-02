@@ -1,6 +1,6 @@
 /**
- * Fix Mobile Menu Logo - Replace "тауRUS" with "RIVERSTROM"
- * This script replaces the incorrect logo in the mobile menu overlay
+ * Fix Mobile Menu Logo - Hide logo area with white rectangle
+ * Detects when hamburger menu is clicked and shows a white rectangle to cover the logo
  */
 
 (function() {
@@ -8,133 +8,163 @@
 
     console.log('[Mobile Logo Fix] Initializing...');
 
-    // The correct RIVERSTROM SVG logo
-    const correctLogoSVG = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="170" height="32" viewBox="0 0 170 32" fill="none">
-            <path d="M28.5714 16C28.5714 7.16344 21.4366 0 12.6364 0C5.65934 0 0 5.68934 0 12.7025V19.2975C0 26.3107 5.65934 32 12.6364 32C19.6134 32 25.2727 26.3107 25.2727 19.2975V12.7025C25.2727 9.19508 22.1429 6.34426 18.3636 6.34426C14.5844 6.34426 11.4545 9.19508 11.4545 12.7025C11.4545 16.2098 14.5844 19.0607 18.3636 19.0607C20.2532 19.0607 21.9481 18.2951 23.1818 17.0328" stroke="#1DE189" stroke-width="2"/>
-            <text x="40" y="23" font-family="Inter, sans-serif" font-size="18" font-weight="500" fill="#1DE189" letter-spacing="0.05em">RIVERSTROM</text>
-        </svg>
-    `.trim();
+    let mobileMenuOpen = false;
 
-    function replaceMobileLogo() {
-        console.log('[Mobile Logo Fix] Running replacement...');
+    let coverRectCreated = false;
+    let clickDetectionSetup = false;
 
-        // Method 1: Look for ALL elements with the wrong text (more aggressive)
-        const allElements = document.querySelectorAll('*');
-        let replacementCount = 0;
-
-        allElements.forEach(el => {
-            // Skip script and style elements
-            if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE') return;
-
-            // Check direct text nodes
-            Array.from(el.childNodes).forEach(node => {
-                if (node.nodeType === 3) { // Text node
-                    const text = node.textContent;
-                    if (text.includes('тау') || text.includes('RUS')) {
-                        console.log('[Mobile Logo Fix] Found wrong text in text node:', text);
-                        node.textContent = text.replace(/тау/g, '').replace(/RUS/g, 'RIVERSTROM');
-                        replacementCount++;
-                    }
-                }
-            });
-
-            // Check element's own text content
-            if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) {
-                const text = el.textContent.trim();
-                if (text === 'тауRUS' || text === 'tayRUS' || text === 'тау' || text === 'RUS') {
-                    console.log('[Mobile Logo Fix] Found wrong text in element:', text, el.tagName, el.className);
-                    el.textContent = 'RIVERSTROM';
-                    el.style.fontFamily = 'Inter, sans-serif';
-                    el.style.fontSize = '18px';
-                    el.style.fontWeight = '500';
-                    el.style.color = '#1DE189';
-                    el.style.letterSpacing = '0.05em';
-                    replacementCount++;
-                }
-            }
-        });
-
-        // Method 2: Look specifically for Framer text components
-        const allTextElements = document.querySelectorAll('[data-framer-component-type="Text"]');
-        allTextElements.forEach(el => {
-            const text = el.textContent.trim();
-            if (text.includes('тау') || text.includes('RUS') || text === 'тауRUS' || text === 'tayRUS') {
-                console.log('[Mobile Logo Fix] Found incorrect logo in Framer component:', text);
-                el.textContent = 'RIVERSTROM';
-                el.style.fontFamily = 'Inter, sans-serif';
-                el.style.fontSize = '18px';
-                el.style.fontWeight = '500';
-                el.style.color = '#1DE189';
-                el.style.letterSpacing = '0.05em';
-                replacementCount++;
-            }
-        });
-
-        // Method 3: Use CSS to hide wrong text and inject correct one
-        if (replacementCount === 0) {
-            console.log('[Mobile Logo Fix] No replacements made, trying CSS method...');
-
-            // Find any element containing the wrong text
-            const walker = document.createTreeWalker(
-                document.body,
-                NodeFilter.SHOW_TEXT,
-                null,
-                false
-            );
-
-            let node;
-            while (node = walker.nextNode()) {
-                if (node.textContent.includes('тау') || node.textContent.includes('RUS')) {
-                    const parent = node.parentElement;
-                    if (parent) {
-                        console.log('[Mobile Logo Fix] Found wrong text via tree walker:', node.textContent);
-                        parent.style.display = 'none';
-
-                        // Create replacement
-                        const replacement = document.createElement('span');
-                        replacement.textContent = 'RIVERSTROM';
-                        replacement.style.fontFamily = 'Inter, sans-serif';
-                        replacement.style.fontSize = '18px';
-                        replacement.style.fontWeight = '500';
-                        replacement.style.color = '#1DE189';
-                        replacement.style.letterSpacing = '0.05em';
-
-                        parent.parentElement.insertBefore(replacement, parent);
-                        replacementCount++;
-                    }
-                }
-            }
+    function createMobileLogoCover() {
+        if (coverRectCreated) {
+            console.log('[Mobile Logo Fix] Rectangle already created, skipping');
+            return;
         }
 
-        console.log('[Mobile Logo Fix] Replacements made:', replacementCount);
+        // Create the rectangle element (hidden by default)
+        let coverRect = document.getElementById('mobile-logo-cover');
+
+        if (!coverRect) {
+            coverRect = document.createElement('div');
+            coverRect.id = 'mobile-logo-cover';
+            coverRect.style.cssText = `
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100vw !important;
+                height: 80px !important;
+                background: rgb(255, 255, 255) !important;
+                z-index: 999999999 !important;
+                pointer-events: none !important;
+                display: none !important;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+            `;
+            document.body.appendChild(coverRect);
+            coverRectCreated = true;
+            console.log('[Mobile Logo Fix] ✅ Created cover rectangle (100vw x 80px)');
+        } else {
+            coverRectCreated = true;
+        }
     }
 
-    // Run on initial load
+    function showMobileLogoCover() {
+        const coverRect = document.getElementById('mobile-logo-cover');
+        if (coverRect && mobileMenuOpen) {
+            coverRect.style.display = 'block';
+            console.log('[Mobile Logo Fix] ✅ Showing cover rectangle');
+        } else if (coverRect) {
+            coverRect.style.display = 'none';
+        }
+    }
+
+    function hideMobileLogoCover() {
+        const coverRect = document.getElementById('mobile-logo-cover');
+        if (coverRect) {
+            coverRect.style.display = 'none';
+            console.log('[Mobile Logo Fix] Hiding cover rectangle');
+        }
+    }
+
+    function setupMobileMenuDetection() {
+        if (clickDetectionSetup) {
+            console.log('[Mobile Logo Fix] Click detection already setup, skipping');
+            return;
+        }
+
+        if (window.innerWidth > 809) {
+            return;
+        }
+
+        clickDetectionSetup = true;
+
+        // Listen for clicks on the entire document
+        document.addEventListener('click', function(e) {
+            const clickX = e.clientX;
+            const clickY = e.clientY;
+            const viewportWidth = window.innerWidth;
+
+            // Check if click is in top-right area (hamburger menu location)
+            // Top-right = right 20% of screen, top 100px
+            const isTopRight = clickX > viewportWidth * 0.8 && clickY < 100;
+
+            if (isTopRight) {
+                // Toggle menu state
+                mobileMenuOpen = !mobileMenuOpen;
+                console.log('[Mobile Logo Fix] Menu toggled:', mobileMenuOpen ? 'OPEN' : 'CLOSED');
+
+                // Show/hide cover immediately
+                showMobileLogoCover();
+            }
+        }, false); // Use false (bubble phase) so we don't block the actual click
+
+        // Also listen for clicks outside to close menu
+        document.addEventListener('click', function(e) {
+            if (mobileMenuOpen) {
+                const clickX = e.clientX;
+                const clickY = e.clientY;
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                // Check if click is in main content area (not in menu area)
+                const isMainContent = clickY > 100 || clickX < viewportWidth * 0.5;
+
+                if (isMainContent) {
+                    // Check immediately if menu should close
+                    const allDivs = document.querySelectorAll('div');
+                    let hasFullScreenDiv = false;
+
+                    allDivs.forEach(div => {
+                        const rect = div.getBoundingClientRect();
+                        if (rect.width >= viewportWidth * 0.95 && rect.height >= viewportHeight * 0.8) {
+                            hasFullScreenDiv = true;
+                        }
+                    });
+
+                    if (!hasFullScreenDiv) {
+                        mobileMenuOpen = false;
+                        hideMobileLogoCover();
+                        console.log('[Mobile Logo Fix] Menu closed by content click');
+                    }
+                }
+            }
+        }, false);
+
+        console.log('[Mobile Logo Fix] Click detection initialized');
+    }
+
+    // Expose functions globally for debugging
+    window.createMobileLogoCover = createMobileLogoCover;
+    window.showMobileLogoCover = showMobileLogoCover;
+    window.hideMobileLogoCover = hideMobileLogoCover;
+
+    // Initialize on mobile
     function init() {
-        // Run multiple times to catch React renders
-        setTimeout(replaceMobileLogo, 500);
-        setTimeout(replaceMobileLogo, 1000);
-        setTimeout(replaceMobileLogo, 2000);
-
-        // Watch for ANY DOM changes and run replacement
-        const observer = new MutationObserver(() => {
-            replaceMobileLogo();
-        });
-
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-            characterData: true
-        });
-
-        console.log('[Mobile Logo Fix] Monitoring for menu changes...');
+        console.log('[Mobile Logo Fix] Init called, viewport width:', window.innerWidth);
+        if (window.innerWidth <= 809) {
+            console.log('[Mobile Logo Fix] Mobile viewport detected, setting up...');
+            createMobileLogoCover(); // Create the rectangle element
+            setupMobileMenuDetection(); // Set up click listeners
+        } else {
+            console.log('[Mobile Logo Fix] Not mobile viewport, skipping');
+        }
     }
 
-    // Initialize when DOM is ready
+    // Run when DOM is ready
     if (document.readyState === 'loading') {
+        console.log('[Mobile Logo Fix] Waiting for DOMContentLoaded...');
         document.addEventListener('DOMContentLoaded', init);
     } else {
+        console.log('[Mobile Logo Fix] DOM already ready, running init...');
         init();
     }
+
+    // Also listen for viewport changes
+    window.addEventListener('resize', () => {
+        console.log('[Mobile Logo Fix] Resize detected, viewport:', window.innerWidth);
+        init();
+    });
+
+    // Run init after a short delay to catch viewport changes
+    setTimeout(() => {
+        console.log('[Mobile Logo Fix] Delayed init check, viewport:', window.innerWidth);
+        init();
+    }, 100);
 })();

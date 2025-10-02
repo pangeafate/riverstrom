@@ -37,16 +37,134 @@
                 opacity: 1 !important;
                 pointer-events: auto !important;
             }
+
+            /* No CSS hiding - will be handled by JavaScript only */
         `;
         document.head.appendChild(style);
         console.log('[Custom Form] Hiding CSS injected');
     }
+
+    let mobileMenuOpen = false;
+
+    function createMobileLogoCover() {
+        // Create the rectangle element (hidden by default)
+        let coverRect = document.getElementById('mobile-logo-cover');
+
+        if (!coverRect) {
+            coverRect = document.createElement('div');
+            coverRect.id = 'mobile-logo-cover';
+            coverRect.style.cssText = `
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 50vw !important;
+                height: 60px !important;
+                background: rgb(255, 255, 255) !important;
+                z-index: 999999 !important;
+                pointer-events: none !important;
+                display: none !important;
+            `;
+            document.body.appendChild(coverRect);
+            console.log('[Mobile Menu Logo] ✅ Created cover rectangle');
+        }
+    }
+
+    function showMobileLogoCover() {
+        const coverRect = document.getElementById('mobile-logo-cover');
+        if (coverRect && mobileMenuOpen) {
+            coverRect.style.display = 'block';
+            console.log('[Mobile Menu Logo] ✅ Showing cover rectangle');
+        } else if (coverRect) {
+            coverRect.style.display = 'none';
+        }
+    }
+
+    function hideMobileLogoCover() {
+        const coverRect = document.getElementById('mobile-logo-cover');
+        if (coverRect) {
+            coverRect.style.display = 'none';
+            console.log('[Mobile Menu Logo] Hiding cover rectangle');
+        }
+    }
+
+    function setupMobileMenuDetection() {
+        if (window.innerWidth > 809) {
+            return;
+        }
+
+        // Listen for clicks on the entire document
+        document.addEventListener('click', function(e) {
+            const clickX = e.clientX;
+            const clickY = e.clientY;
+            const viewportWidth = window.innerWidth;
+
+            // Check if click is in top-right area (hamburger menu location)
+            // Top-right = right 20% of screen, top 100px
+            const isTopRight = clickX > viewportWidth * 0.8 && clickY < 100;
+
+            if (isTopRight) {
+                // Toggle menu state
+                mobileMenuOpen = !mobileMenuOpen;
+                console.log('[Mobile Menu Logo] Menu toggled:', mobileMenuOpen ? 'OPEN' : 'CLOSED');
+
+                // Show/hide cover with small delay to let menu animate
+                setTimeout(showMobileLogoCover, 100);
+            }
+        }, true);
+
+        // Also listen for clicks outside to close menu
+        document.addEventListener('click', function(e) {
+            if (mobileMenuOpen) {
+                const clickX = e.clientX;
+                const clickY = e.clientY;
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                // Check if click is in main content area (not in menu area)
+                const isMainContent = clickY > 100 || clickX < viewportWidth * 0.5;
+
+                if (isMainContent) {
+                    // Delay to check if it was actually a menu close click
+                    setTimeout(() => {
+                        const allDivs = document.querySelectorAll('div');
+                        let hasFullScreenDiv = false;
+
+                        allDivs.forEach(div => {
+                            const rect = div.getBoundingClientRect();
+                            if (rect.width >= viewportWidth * 0.95 && rect.height >= viewportHeight * 0.8) {
+                                hasFullScreenDiv = true;
+                            }
+                        });
+
+                        if (!hasFullScreenDiv) {
+                            mobileMenuOpen = false;
+                            hideMobileLogoCover();
+                            console.log('[Mobile Menu Logo] Menu closed by content click');
+                        }
+                    }, 100);
+                }
+            }
+        }, true);
+
+        console.log('[Mobile Menu Logo] Click detection initialized');
+    }
+
+    // Expose functions globally for debugging
+    window.createMobileLogoCover = createMobileLogoCover;
+    window.showMobileLogoCover = showMobileLogoCover;
+    window.hideMobileLogoCover = hideMobileLogoCover;
 
     function init() {
         console.log('[Custom Form] Initializing with SPA navigation support...');
 
         // Inject CSS to hide forms before replacement
         injectHidingCSS();
+
+        // Set up mobile menu logo hiding (click-based detection)
+        if (window.innerWidth <= 809) {
+            createMobileLogoCover(); // Create the rectangle element
+            setupMobileMenuDetection(); // Set up click listeners
+        }
 
         // Set up MutationObserver to watch for form container appearing
         setupMutationObserver();
@@ -132,24 +250,25 @@
         // Create custom form HTML
         const customFormHTML = `
             <div class="custom-contact-form-container" style="
-                background: white;
-                border-radius: 16px;
-                padding: 32px;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                background: transparent;
+                border-radius: 0;
+                padding: 0;
+                box-shadow: none;
             ">
-                <div class="form-heading" style="margin-bottom: 24px;">
+                <div class="form-heading" style="margin-bottom: 32px;">
                     <h5 style="
-                        font-family: Inter, sans-serif;
-                        font-size: 20px;
+                        font-family: Montserrat, sans-serif;
+                        font-size: 32px;
                         font-weight: 600;
-                        margin: 0 0 8px 0;
+                        margin: 0 0 12px 0;
                         color: rgb(38, 38, 40);
-                    "><strong>Напишите нам</strong></h5>
+                    ">Напишите нам</h5>
                     <p style="
-                        font-family: Inter, sans-serif;
-                        font-size: 14px;
+                        font-family: Montserrat, sans-serif;
+                        font-size: 16px;
                         margin: 0;
-                        color: rgb(87, 87, 87);
+                        color: rgb(153, 153, 153);
+                        font-weight: 400;
                     ">Будем рады общению с вами!</p>
                 </div>
 
@@ -159,7 +278,7 @@
                         <div class="form-field">
                             <label style="
                                 display: block;
-                                font-family: Inter, sans-serif;
+                                font-family: Montserrat, sans-serif;
                                 font-size: 14px;
                                 font-weight: 500;
                                 margin-bottom: 8px;
@@ -172,8 +291,8 @@
                                 required
                                 style="
                                     width: 100%;
-                                    padding: 12px 16px;
-                                    font-family: Inter, sans-serif;
+                                    padding: 14px 16px;
+                                    font-family: Montserrat, sans-serif;
                                     font-size: 14px;
                                     border: 1px solid rgb(195, 196, 197);
                                     border-radius: 8px;
@@ -189,7 +308,7 @@
                         <div class="form-field">
                             <label style="
                                 display: block;
-                                font-family: Inter, sans-serif;
+                                font-family: Montserrat, sans-serif;
                                 font-size: 14px;
                                 font-weight: 500;
                                 margin-bottom: 8px;
@@ -202,8 +321,8 @@
                                 required
                                 style="
                                     width: 100%;
-                                    padding: 12px 16px;
-                                    font-family: Inter, sans-serif;
+                                    padding: 14px 16px;
+                                    font-family: Montserrat, sans-serif;
                                     font-size: 14px;
                                     border: 1px solid rgb(195, 196, 197);
                                     border-radius: 8px;
@@ -221,7 +340,7 @@
                     <div class="form-field">
                         <label style="
                             display: block;
-                            font-family: Inter, sans-serif;
+                            font-family: Montserrat, sans-serif;
                             font-size: 14px;
                             font-weight: 500;
                             margin-bottom: 8px;
@@ -234,8 +353,8 @@
                             required
                             style="
                                 width: 100%;
-                                padding: 12px 16px;
-                                font-family: Inter, sans-serif;
+                                padding: 14px 16px;
+                                font-family: Montserrat, sans-serif;
                                 font-size: 14px;
                                 border: 1px solid rgb(195, 196, 197);
                                 border-radius: 8px;
@@ -252,7 +371,7 @@
                     <div class="form-field">
                         <label style="
                             display: block;
-                            font-family: Inter, sans-serif;
+                            font-family: Montserrat, sans-serif;
                             font-size: 14px;
                             font-weight: 500;
                             margin-bottom: 8px;
@@ -263,8 +382,8 @@
                             required
                             style="
                                 width: 100%;
-                                padding: 12px 16px;
-                                font-family: Inter, sans-serif;
+                                padding: 14px 16px;
+                                font-family: Montserrat, sans-serif;
                                 font-size: 14px;
                                 border: 1px solid rgb(195, 196, 197);
                                 border-radius: 8px;
@@ -291,7 +410,7 @@
                     <div class="form-field">
                         <label style="
                             display: block;
-                            font-family: Inter, sans-serif;
+                            font-family: Montserrat, sans-serif;
                             font-size: 14px;
                             font-weight: 500;
                             margin-bottom: 8px;
@@ -304,8 +423,8 @@
                             rows="4"
                             style="
                                 width: 100%;
-                                padding: 12px 16px;
-                                font-family: Inter, sans-serif;
+                                padding: 14px 16px;
+                                font-family: Montserrat, sans-serif;
                                 font-size: 14px;
                                 border: 1px solid rgb(195, 196, 197);
                                 border-radius: 8px;
@@ -324,7 +443,7 @@
                     <div class="form-field">
                         <label style="
                             display: block;
-                            font-family: Inter, sans-serif;
+                            font-family: Montserrat, sans-serif;
                             font-size: 14px;
                             font-weight: 500;
                             margin-bottom: 8px;
@@ -336,8 +455,8 @@
                             placeholder=""
                             style="
                                 width: 100%;
-                                padding: 12px 16px;
-                                font-family: Inter, sans-serif;
+                                padding: 14px 16px;
+                                font-family: Montserrat, sans-serif;
                                 font-size: 14px;
                                 border: 1px solid rgb(195, 196, 197);
                                 border-radius: 8px;
@@ -355,8 +474,8 @@
                         type="submit"
                         style="
                             width: 100%;
-                            padding: 14px 24px;
-                            font-family: Inter, sans-serif;
+                            padding: 16px 24px;
+                            font-family: Montserrat, sans-serif;
                             font-size: 16px;
                             font-weight: 600;
                             color: white;
