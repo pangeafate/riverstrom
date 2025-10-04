@@ -1,0 +1,280 @@
+{
+  "config": {
+    "configFile": "/Users/sergeypodolskiy/CODEBASE/25 07 29 Riverstrom/playwright.config.js",
+    "rootDir": "/Users/sergeypodolskiy/CODEBASE/25 07 29 Riverstrom/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/sergeypodolskiy/CODEBASE/25 07 29 Riverstrom/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/sergeypodolskiy/CODEBASE/25 07 29 Riverstrom/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 1,
+    "webServer": {
+      "command": "python3 -m http.server 8888",
+      "port": 8888,
+      "timeout": 120000,
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "manual-test-rectangle.spec.js",
+      "file": "manual-test-rectangle.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "manual rectangle visibility test",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11727,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Initializing...\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Waiting for DOMContentLoaded...\n"
+                    },
+                    {
+                      "text": "BROWSER: [N8N Handler V2] Initializing...\n"
+                    },
+                    {
+                      "text": "BROWSER: [Custom Form] Initializing with SPA navigation support...\n"
+                    },
+                    {
+                      "text": "BROWSER: [Custom Form] Hiding CSS injected\n"
+                    },
+                    {
+                      "text": "BROWSER: [Custom Form] On home page, replacing bottom form...\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Init called, viewport width: 1280\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Not mobile viewport, skipping\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Delayed init check, viewport: 1280\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Init called, viewport width: 1280\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Not mobile viewport, skipping\n"
+                    },
+                    {
+                      "text": "BROWSER: [N8N Handler V2] Found 1 Framer form(s)\n"
+                    },
+                    {
+                      "text": "BROWSER: Recoverable error has happened. Please check any custom code or code overrides to fix server/client mismatches:\n Error: Minified React error #418; visit https://reactjs.org/docs/error-decoder.html?invariant=418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.\n    at Ip (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:14:4801)\n    at mS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:6927)\n    at MS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:46055)\n    at PS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:39962)\n    at $L (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:39934)\n    at RS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:34897)\n    at _h (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:9:93209)\n    at MessagePort.Rh (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:9:93603) \n    at Suspense\n    at fv (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:888:994)\n    at lz (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:881:16981)\n    at RV (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:77806)\n    at V$ (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:890:20655)\n    at http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:888:4595\n    at http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:879:54718\n    at X$ (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:890:28514)\n    at hb (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:9:3986)\n    at GG (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:890:28841)\n    at TG (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:888:8156)\n    at SU (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:86053)\n"
+                    },
+                    {
+                      "text": "BROWSER: Recoverable error has happened. Please check any custom code or code overrides to fix server/client mismatches:\n Error: Minified React error #418; visit https://reactjs.org/docs/error-decoder.html?invariant=418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.\n    at Ip (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:14:4801)\n    at mS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:6927)\n    at MS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:46055)\n    at PS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:39962)\n    at $L (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:39934)\n    at RS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:34897)\n    at _h (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:9:93209)\n    at MessagePort.Rh (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:9:93603) \n    at lz (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:881:16981)\n    at RV (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:77806)\n    at V$ (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:890:20655)\n    at http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:888:4595\n    at http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:879:54718\n    at X$ (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:890:28514)\n    at hb (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:9:3986)\n    at GG (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:890:28841)\n    at TG (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:888:8156)\n    at SU (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:86053)\n"
+                    },
+                    {
+                      "text": "BROWSER: Recoverable error has happened. Please check any custom code or code overrides to fix server/client mismatches:\n Error: Minified React error #418; visit https://reactjs.org/docs/error-decoder.html?invariant=418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.\n    at Ip (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:14:4801)\n    at MS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:45852)\n    at PS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:39962)\n    at $L (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:39934)\n    at RS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:34897)\n    at _h (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:9:93209)\n    at MessagePort.Rh (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:9:93603) \n    at div\n    at TG (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:888:8156)\n    at SU (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:86053)\n"
+                    },
+                    {
+                      "text": "BROWSER: Recoverable error has happened. Please check any custom code or code overrides to fix server/client mismatches:\n Error: Minified React error #423; visit https://reactjs.org/docs/error-decoder.html?invariant=423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.\n    at MS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:45521)\n    at PS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:39962)\n    at zL (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:39890)\n    at uu (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:39743)\n    at Up (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:36087)\n    at RS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:35035)\n    at _h (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:9:93209)\n    at MessagePort.Rh (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:9:93603) \n"
+                    },
+                    {
+                      "text": "BROWSER: [Custom Form] Replacing bottom form...\n"
+                    },
+                    {
+                      "text": "BROWSER: [Custom Form] Bottom form replaced and handler attached\n"
+                    },
+                    {
+                      "text": "BROWSER: [N8N Handler V2] Attaching handlers to 1 form(s)\n"
+                    },
+                    {
+                      "text": "BROWSER: [N8N Handler V2] Attaching handler to form 0: framer-1oy82dr form-visible\n"
+                    },
+                    {
+                      "text": "BROWSER: [N8N Handler V2] All forms handled successfully\n"
+                    },
+                    {
+                      "text": "BROWSER: Access to script at 'https://edit.framer.com/init.mjs' from origin 'http://localhost:8888' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: net::ERR_FAILED\n"
+                    },
+                    {
+                      "text": "BROWSER: TypeError: Failed to fetch dynamically imported module: https://edit.framer.com/init.mjs\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Resize detected, viewport: 375\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Init called, viewport width: 375\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Mobile viewport detected, setting up...\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] ✅ Created cover rectangle (100vw x 80px)\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Click detection initialized\n"
+                    },
+                    {
+                      "text": "\n=== INITIAL STATE ===\n"
+                    },
+                    {
+                      "text": "Rectangle before click: {\n  \"exists\": true,\n  \"inlineDisplay\": \"none\",\n  \"computedDisplay\": \"none\",\n  \"inlineBackground\": \"rgb(255, 255, 255)\",\n  \"computedBackground\": \"rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box\",\n  \"computedBackgroundColor\": \"rgb(255, 255, 255)\",\n  \"position\": \"fixed\",\n  \"top\": \"0px\",\n  \"left\": \"0px\",\n  \"width\": \"375px\",\n  \"height\": \"80px\",\n  \"zIndex\": \"999999999\",\n  \"opacity\": \"1\",\n  \"visibility\": \"visible\",\n  \"pointerEvents\": \"none\",\n  \"boundingRect\": {\n    \"x\": 0,\n    \"y\": 0,\n    \"width\": 0,\n    \"height\": 0,\n    \"top\": 0,\n    \"right\": 0,\n    \"bottom\": 0,\n    \"left\": 0\n  }\n}\n"
+                    },
+                    {
+                      "text": "\n=== CLICKING HAMBURGER ===\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Menu toggled: OPEN\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] ✅ Showing cover rectangle\n"
+                    },
+                    {
+                      "text": "\n=== AFTER CLICK ===\n"
+                    },
+                    {
+                      "text": "Rectangle after click: {\n  \"exists\": true,\n  \"inlineDisplay\": \"block\",\n  \"computedDisplay\": \"block\",\n  \"inlineBackground\": \"rgb(255, 255, 255)\",\n  \"computedBackground\": \"rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box\",\n  \"computedBackgroundColor\": \"rgb(255, 255, 255)\",\n  \"position\": \"fixed\",\n  \"top\": \"0px\",\n  \"left\": \"0px\",\n  \"width\": \"375px\",\n  \"height\": \"80px\",\n  \"zIndex\": \"999999999\",\n  \"opacity\": \"1\",\n  \"visibility\": \"visible\",\n  \"pointerEvents\": \"none\",\n  \"boundingRect\": {\n    \"x\": 0,\n    \"y\": 0,\n    \"width\": 375,\n    \"height\": 80,\n    \"top\": 0,\n    \"right\": 375,\n    \"bottom\": 80,\n    \"left\": 0\n  }\n}\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Resize detected, viewport: 375\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Init called, viewport width: 375\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Mobile viewport detected, setting up...\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Rectangle already created, skipping\n"
+                    },
+                    {
+                      "text": "BROWSER: [Mobile Logo Fix] Click detection already setup, skipping\n"
+                    },
+                    {
+                      "text": "\n=== MENU STATE ===\n"
+                    },
+                    {
+                      "text": "[\n  {\n    \"name\": \"Nav section\",\n    \"width\": 375,\n    \"height\": 305,\n    \"display\": \"flex\",\n    \"opacity\": \"1\",\n    \"transform\": \"matrix(1, 0, 0, 1, -187.5, 0)\"\n  },\n  {\n    \"name\": \"Nav items\",\n    \"width\": 343,\n    \"height\": 124,\n    \"display\": \"flex\",\n    \"opacity\": \"1\",\n    \"transform\": \"none\"\n  },\n  {\n    \"name\": \"Nav item\",\n    \"width\": 46,\n    \"height\": 25,\n    \"display\": \"block\",\n    \"opacity\": \"1\",\n    \"transform\": \"none\"\n  },\n  {\n    \"name\": \"Nav item\",\n    \"width\": 83,\n    \"height\": 25,\n    \"display\": \"block\",\n    \"opacity\": \"1\",\n    \"transform\": \"none\"\n  }\n]\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2025-10-02T10:34:51.363Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "abaff7dd3f881c01b438-66ff18ea763a7f4dcab5",
+          "file": "manual-test-rectangle.spec.js",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-10-02T10:34:51.130Z",
+    "duration": 12154.840999999999,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

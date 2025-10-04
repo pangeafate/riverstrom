@@ -1,0 +1,336 @@
+{
+  "name": "RiverstromAI_form_production",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "contact-form",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -672,
+        96
+      ],
+      "id": "d94ec992-3aa1-4d6c-bcb6-8d1c6f7376ce",
+      "name": "Webhook",
+      "webhookId": "f8405f15-d0ea-475f-93c0-4dc96c5f3473"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c118f54e-5acf-4a55-9c18-af5f00de7971",
+              "name": "name",
+              "value": "={{\n  [$json.body?.firstName, $json.body?.lastName]\n    .filter(v => !!v && v.toString().trim())\n    .join(' ')\n    .trim()\n}}\n",
+              "type": "string"
+            },
+            {
+              "id": "41ac94da-a750-444c-8b96-1f262dac86d0",
+              "name": "email",
+              "value": "={{ ($json.body?.email ?? '').toString().trim().toLowerCase() }}\n",
+              "type": "string"
+            },
+            {
+              "id": "67fe7bcb-d6bf-4372-910a-ba1e573134fc",
+              "name": "message",
+              "value": "={{ ($json.body?.message ?? '').toString().trim() }}\n",
+              "type": "string"
+            },
+            {
+              "id": "7a591243-9dd0-41f1-867e-6ad0f323e3d6",
+              "name": "referer",
+              "value": "={{ $json.body?.referer ?? $json.headers?.referer ?? $json.headers?.origin ?? '' }}\n\n",
+              "type": "string"
+            },
+            {
+              "id": "299d4d71-c009-43c4-919d-ba9abf8b0e9e",
+              "name": "company",
+              "value": "={{ ($json.body?.company ?? '').toString().trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "86faa63f-c9d6-4969-af5c-ac88755b4c18",
+              "name": "city",
+              "value": "={{ ($json.body?.city ?? '').toString().trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "8ac8a9b1-8a66-44f8-970c-5a122de4afff",
+              "name": "website",
+              "value": "={{ ($json.body?.website ?? '').toString().trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "a941d3ca-fb8b-40b6-a6d1-ff43d3a5b13e",
+              "name": "ip",
+              "value": "={{ $json.headers?.['x-forwarded-for'] ?? $json.headers?.['cf-connecting-ip'] ?? $json.headers?.['x-real-ip'] ?? 'localhost' }}",
+              "type": "string"
+            },
+            {
+              "id": "6c690e8b-061f-4e51-9646-4443f78b0ba1",
+              "name": "ua",
+              "value": "={{ $json.headers?.['user-agent'] ?? '' }}",
+              "type": "string"
+            },
+            {
+              "id": "dc3f4f12-1234-5678-90ab-testinglocalhost",
+              "name": "timestamp",
+              "value": "={{ new Date().toISOString() }}",
+              "type": "string"
+            },
+            {
+              "id": "env-indicator",
+              "name": "environment",
+              "value": "={{ $json.headers?.origin?.includes('localhost') ? 'localhost-test' : 'production' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -448,
+        96
+      ],
+      "id": "0f5a745b-1a5c-4067-84cf-65971defc542",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8361346d-c071-4bbc-9518-228ac340af97",
+              "leftValue": "={{ ($json.website ?? '').trim() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "b60cdd52-a668-4791-84b3-394748361566",
+              "leftValue": "={{ ($json.email ?? '').trim() }}",
+              "rightValue": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            },
+            {
+              "id": "74b8d34c-2650-4688-86c2-58f2936a1a5f",
+              "leftValue": "={{ ($json.name ?? '').trim() }}\n",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "9f89265f-3fc7-431c-95c4-0988d12109a9",
+              "leftValue": "={{ ($json.message ?? '').trim() }}\n",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -224,
+        96
+      ],
+      "id": "930ef509-1b7e-42d7-b31a-ec10e6224be3",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, error: 'Invalid form data. Please check all required fields.' }) }}",
+        "options": {
+          "responseCode": 400,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "POST, OPTIONS"
+              },
+              {
+                "name": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Accept"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        208
+      ],
+      "id": "f335e9b3-f12b-4cb8-99d8-8642b1b27d71",
+      "name": "Respond to Webhook (Error)"
+    },
+    {
+      "parameters": {
+        "chatId": "-1002960746192",
+        "text": "=🔔 Новая заявка с сайта {{ $json.environment === 'localhost-test' ? '(LOCALHOST TEST)' : '' }}:\n\n<b>👤 Имя:</b> {{$json.name}}\n<b>📧 Email:</b> {{$json.email}}\n{{ $json.company ? `<b>🏢 Компания:</b> ${$json.company}\n` : '' }}{{ $json.city ? `<b>📍 Город:</b> ${$json.city}\n` : '' }}\n<b>💬 Сообщение:</b>\n{{$json.message}}\n\n<i>📄 Страница:</i> {{$json.referer}}\n<i>🌐 IP:</i> {{$json.ip}}\n<i>⚙️ Среда:</i> {{$json.environment}}\n<i>🕐 Время:</i> {{$json.timestamp}}\n",
+        "additionalFields": {
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "047d5eb1-54d0-43d5-9cd7-8b93ab989b16",
+      "name": "Send a text message",
+      "webhookId": "dfdfabfc-1990-4a5b-a517-af55c9ca5ab1",
+      "credentials": {
+        "telegramApi": {
+          "id": "Lr6LckQQQ5nmBmj2",
+          "name": "PangeaFetch"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ \n  success: true, \n  message: 'Спасибо! Мы получили вашу заявку и скоро свяжемся с вами.',\n  timestamp: $json.timestamp,\n  environment: $json.environment\n}) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json; charset=utf-8"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "POST, OPTIONS"
+              },
+              {
+                "name": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Accept"
+              },
+              {
+                "name": "X-Form-Processed",
+                "value": "n8n-webhook"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "7db69ec4-5280-4e12-bf9e-6c4be6cb4eb2",
+      "name": "Respond to Webhook (Success)"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook (Error)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook (Success)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d600fbc9-f72e-4b26-b24b-9827fe87151f",
+  "meta": {
+    "instanceId": "d8d0f3a1b5452865880018369d00dbc23f6a859a8ab8f3d9720659ce3799163c"
+  },
+  "id": "iSaaCZY5NeOEFFdY",
+  "tags": []
+}

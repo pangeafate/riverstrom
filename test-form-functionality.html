@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Functionality Test - Riverstrom AI</title>
+    <style>
+        body {
+            font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 { color: #262628; }
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            background: #f0f0f0;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .test-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .test-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>N8N Form Handler V2 - Test Dashboard</h1>
+
+    <div class="status info">
+        <h2>Test Status</h2>
+        <p>✅ <strong>N8N Handler V2</strong> is now active</p>
+        <p>✅ Old form-handler.js has been removed</p>
+        <p>✅ Forms should now accept input normally</p>
+    </div>
+
+    <div class="test-results">
+        <div class="test-card">
+            <h3>What Changed</h3>
+            <ul>
+                <li><strong>Previous Issue:</strong> Forms were replaced with HTML, breaking Framer's functionality</li>
+                <li><strong>Solution:</strong> N8N Handler V2 intercepts form submissions without replacing HTML</li>
+                <li><strong>Method:</strong> Uses event capture phase to intercept before Framer</li>
+            </ul>
+        </div>
+
+        <div class="test-card">
+            <h3>How It Works</h3>
+            <ol>
+                <li>User fills out Framer form normally</li>
+                <li>On submit click, V2 handler captures the event</li>
+                <li>Form data is collected and sent to N8N webhook</li>
+                <li>Success/error feedback shown to user</li>
+                <li>Form clears on successful submission</li>
+            </ol>
+        </div>
+
+        <div class="test-card">
+            <h3>Test Instructions</h3>
+            <ol>
+                <li>Open the form below in the iframe</li>
+                <li>Try typing in the form fields</li>
+                <li>Fill all required fields:
+                    <ul>
+                        <li>Имя (First Name)</li>
+                        <li>Фамилия (Last Name)</li>
+                        <li>Email</li>
+                        <li>Город (City)</li>
+                        <li>Сообщение (Message)</li>
+                    </ul>
+                </li>
+                <li>Click "Отправить" to submit</li>
+                <li>Watch for success message</li>
+            </ol>
+        </div>
+
+        <div class="test-card">
+            <h3>Console Commands</h3>
+            <p>Open browser console (F12) and run:</p>
+            <pre><code>// Check if handler is loaded
+console.log('N8N Handler V2:', window.N8NHandlerV2);
+
+// Test form data collection
+var container = document.querySelector('.framer-7wmuvs');
+if (container && window.N8NHandlerV2) {
+    console.log('Form data:', window.N8NHandlerV2.collectFormData(container));
+}</code></pre>
+        </div>
+    </div>
+
+    <h2>Live Form Test</h2>
+    <iframe src="/" title="Homepage with Form"></iframe>
+
+    <script>
+        // Monitor for handler loading
+        setTimeout(() => {
+            if (window.N8NHandlerV2) {
+                console.log('[Test Dashboard] N8N Handler V2 is loaded and ready');
+            } else {
+                console.warn('[Test Dashboard] N8N Handler V2 not found - check script loading');
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

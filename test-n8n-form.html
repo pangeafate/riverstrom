@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test N8N Form Integration - Riverstrom AI</title>
+    <style>
+        body {
+            font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: rgb(38, 38, 40);
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: rgb(87, 87, 87);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .test-info {
+            background: rgba(29, 225, 137, 0.1);
+            border: 1px solid rgba(29, 225, 137, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+        }
+        .test-info h2 {
+            font-size: 16px;
+            color: rgb(29, 225, 137);
+            margin: 0 0 10px 0;
+        }
+        .test-info ul {
+            margin: 5px 0;
+            padding-left: 20px;
+            color: rgb(87, 87, 87);
+            font-size: 14px;
+        }
+        .test-info code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>N8N Form Test</h1>
+        <p class="subtitle">Тестовая страница для проверки интеграции форм с N8N</p>
+
+        <div class="test-info">
+            <h2>ℹ️ Информация о тесте</h2>
+            <ul>
+                <li>Webhook URL: <code>https://n8n.lakestrom.com/webhook/contact-form</code></li>
+                <li>Метод: POST с JSON payload</li>
+                <li>Обязательные поля: Имя, Фамилия, Email, Город, Сообщение</li>
+                <li>Honeypot поле: website (должно быть пустым)</li>
+                <li>После отправки форма отправит уведомление в Telegram</li>
+            </ul>
+        </div>
+
+        <!-- Form will be injected here by n8n-form-handler.js -->
+        <div data-framer-name="ContactForm"></div>
+    </div>
+
+    <script defer src="assets/js/n8n-form-handler.js"></script>
+</body>
+</html>
