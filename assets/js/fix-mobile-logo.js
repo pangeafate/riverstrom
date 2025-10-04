@@ -1,16 +1,17 @@
 /**
  * Fix Mobile Menu Logo - Hide logo area with white rectangle
- * Uses MutationObserver to detect actual menu state changes (reliable in production)
+ * Ultra-fast MutationObserver with synchronous checks for instant response
  */
 
 (function() {
     'use strict';
 
-    console.log('[Mobile Logo Fix] Initializing with DOM observation...');
+    console.log('[Mobile Logo Fix] Initializing with ultra-fast DOM observation...');
 
     let coverRect = null;
     let observer = null;
     let isMenuOpen = false;
+    let checkScheduled = false;
 
     function createCoverRectangle() {
         if (coverRect) return;
@@ -50,20 +51,19 @@
     }
 
     function checkMenuState() {
-        // Look for the mobile menu overlay (Framer creates a full-screen div when menu opens)
+        // Ultra-fast check - runs synchronously
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
 
-        // Find divs that could be the menu overlay
         const allDivs = document.querySelectorAll('div');
         let menuIsOpen = false;
 
-        allDivs.forEach(div => {
+        for (let i = 0; i < allDivs.length; i++) {
+            const div = allDivs[i];
             const rect = div.getBoundingClientRect();
             const style = window.getComputedStyle(div);
 
             // Check if this is a full-screen overlay (menu)
-            // Framer menu: full width/height, high z-index, visible
             if (rect.width >= viewportWidth * 0.9 &&
                 rect.height >= viewportHeight * 0.7 &&
                 style.position === 'fixed' &&
@@ -72,13 +72,25 @@
                 style.display !== 'none' &&
                 style.visibility !== 'hidden') {
                 menuIsOpen = true;
+                break; // Exit early when found
             }
-        });
+        }
 
         if (menuIsOpen) {
             showCover();
         } else {
             hideCover();
+        }
+
+        checkScheduled = false;
+    }
+
+    function scheduleCheck() {
+        // Use synchronous check instead of debouncing
+        if (!checkScheduled) {
+            checkScheduled = true;
+            // Check immediately, no setTimeout
+            checkMenuState();
         }
     }
 
@@ -86,19 +98,21 @@
         if (observer) return;
 
         observer = new MutationObserver((mutations) => {
-            // Check menu state whenever DOM changes
-            checkMenuState();
+            // Immediate synchronous check on every mutation
+            scheduleCheck();
         });
 
-        // Observe the entire body for changes
+        // Observe with maximum sensitivity
         observer.observe(document.body, {
-            childList: true,      // Watch for added/removed elements
-            subtree: true,        // Watch entire subtree
-            attributes: true,     // Watch attribute changes (style, class, etc.)
-            attributeFilter: ['style', 'class', 'data-framer-name'] // Only relevant attributes
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['style', 'class', 'data-framer-name'],
+            attributeOldValue: false,
+            characterData: false
         });
 
-        console.log('[Mobile Logo Fix] ✅ Observer started');
+        console.log('[Mobile Logo Fix] ✅ Observer started (ultra-fast mode)');
     }
 
     function init() {
@@ -134,8 +148,17 @@
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(init, 150);
+        resizeTimeout = setTimeout(init, 100);
     });
+
+    // Also check on any click (for instant response to hamburger)
+    document.addEventListener('click', () => {
+        if (window.innerWidth <= 809) {
+            // Double-check menu state on any click for instant response
+            setTimeout(checkMenuState, 0);
+            setTimeout(checkMenuState, 10);
+        }
+    }, true); // Use capture phase to run before other handlers
 
     // Expose for debugging
     window.mobileLogoFix = {
@@ -145,5 +168,5 @@
         getState: () => ({ isMenuOpen, hasRect: !!coverRect, hasObserver: !!observer })
     };
 
-    console.log('[Mobile Logo Fix] ✅ Initialized (use window.mobileLogoFix for debugging)');
+    console.log('[Mobile Logo Fix] ✅ Initialized (ultra-fast mode with click detection)');
 })();
