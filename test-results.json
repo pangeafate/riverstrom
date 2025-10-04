@@ -69,13 +69,13 @@
   },
   "suites": [
     {
-      "title": "manual-test-rectangle.spec.js",
-      "file": "manual-test-rectangle.spec.js",
+      "title": "test-real-browser.spec.js",
+      "file": "test-real-browser.spec.js",
       "column": 0,
       "line": 0,
       "specs": [
         {
-          "title": "manual rectangle visibility test",
+          "title": "check what renders in real browser after refresh",
           "ok": true,
           "tags": [],
           "tests": [
@@ -90,17 +90,50 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 11727,
+                  "duration": 4812,
                   "errors": [],
                   "stdout": [
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] Initializing...\n"
+                      "text": "BROWSER: [Custom Mobile Menu] Initializing...\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] Waiting for DOMContentLoaded...\n"
+                      "text": "BROWSER: [Custom Mobile Menu] Script loaded\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
+                    },
+                    {
+                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
                     },
                     {
                       "text": "BROWSER: [N8N Handler V2] Initializing...\n"
+                    },
+                    {
+                      "text": "BROWSER: [Custom Mobile Menu] Checking viewport...\n"
+                    },
+                    {
+                      "text": "BROWSER: [Custom Mobile Menu] Desktop viewport, skipping initialization\n"
                     },
                     {
                       "text": "BROWSER: [Custom Form] Initializing with SPA navigation support...\n"
@@ -110,48 +143,6 @@
                     },
                     {
                       "text": "BROWSER: [Custom Form] On home page, replacing bottom form...\n"
-                    },
-                    {
-                      "text": "BROWSER: [Mobile Logo Fix] Init called, viewport width: 1280\n"
-                    },
-                    {
-                      "text": "BROWSER: [Mobile Logo Fix] Not mobile viewport, skipping\n"
-                    },
-                    {
-                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
-                    },
-                    {
-                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
-                    },
-                    {
-                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
-                    },
-                    {
-                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
-                    },
-                    {
-                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
-                    },
-                    {
-                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
-                    },
-                    {
-                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
-                    },
-                    {
-                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
-                    },
-                    {
-                      "text": "BROWSER: Failed to load resource: the server responded with a status of 404 (File not found)\n"
-                    },
-                    {
-                      "text": "BROWSER: [Mobile Logo Fix] Delayed init check, viewport: 1280\n"
-                    },
-                    {
-                      "text": "BROWSER: [Mobile Logo Fix] Init called, viewport width: 1280\n"
-                    },
-                    {
-                      "text": "BROWSER: [Mobile Logo Fix] Not mobile viewport, skipping\n"
                     },
                     {
                       "text": "BROWSER: [N8N Handler V2] Found 1 Framer form(s)\n"
@@ -169,19 +160,25 @@
                       "text": "BROWSER: Recoverable error has happened. Please check any custom code or code overrides to fix server/client mismatches:\n Error: Minified React error #423; visit https://reactjs.org/docs/error-decoder.html?invariant=423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.\n    at MS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:45521)\n    at PS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:39962)\n    at zL (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:39890)\n    at uu (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:39743)\n    at Up (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:36087)\n    at RS (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:16:35035)\n    at _h (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:9:93209)\n    at MessagePort.Rh (http://localhost:8888/assets/scripts/chunk-J42KTZAE.mjs:9:93603) \n"
                     },
                     {
-                      "text": "BROWSER: [Custom Form] Replacing bottom form...\n"
+                      "text": "\n=== WAITING FOR PAGE TO SETTLE ===\n"
                     },
                     {
-                      "text": "BROWSER: [Custom Form] Bottom form replaced and handler attached\n"
+                      "text": "BROWSER: [Custom Mobile Menu] Viewport changed to mobile, reinitializing...\n"
                     },
                     {
-                      "text": "BROWSER: [N8N Handler V2] Attaching handlers to 1 form(s)\n"
+                      "text": "BROWSER: [Custom Mobile Menu] Checking viewport...\n"
                     },
                     {
-                      "text": "BROWSER: [N8N Handler V2] Attaching handler to form 0: framer-1oy82dr form-visible\n"
+                      "text": "BROWSER: [Custom Mobile Menu] Mobile viewport detected\n"
                     },
                     {
-                      "text": "BROWSER: [N8N Handler V2] All forms handled successfully\n"
+                      "text": "BROWSER: [Custom Mobile Menu] ✅ Hamburger created\n"
+                    },
+                    {
+                      "text": "BROWSER: [Custom Mobile Menu] ✅ Menu overlay created\n"
+                    },
+                    {
+                      "text": "BROWSER: [Custom Mobile Menu] ✅ Mobile menu initialized\n"
                     },
                     {
                       "text": "BROWSER: Access to script at 'https://edit.framer.com/init.mjs' from origin 'http://localhost:8888' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.\n"
@@ -193,66 +190,201 @@
                       "text": "BROWSER: TypeError: Failed to fetch dynamically imported module: https://edit.framer.com/init.mjs\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] Resize detected, viewport: 375\n"
+                      "text": "BROWSER: [N8N Handler V2] Attaching handlers to 1 form(s)\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] Init called, viewport width: 375\n"
+                      "text": "BROWSER: [N8N Handler V2] Attaching handler to form 0: framer-1oy82dr\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] Mobile viewport detected, setting up...\n"
+                      "text": "BROWSER: [N8N Handler V2] All forms handled successfully\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] ✅ Created cover rectangle (100vw x 80px)\n"
+                      "text": "BROWSER: [Custom Form] Replacing bottom form...\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] Click detection initialized\n"
+                      "text": "BROWSER: [Custom Form] Bottom form replaced and handler attached\n"
                     },
                     {
-                      "text": "\n=== INITIAL STATE ===\n"
+                      "text": "\n=== CHECKING WHAT IS IN TOP-RIGHT CORNER ===\n"
                     },
                     {
-                      "text": "Rectangle before click: {\n  \"exists\": true,\n  \"inlineDisplay\": \"none\",\n  \"computedDisplay\": \"none\",\n  \"inlineBackground\": \"rgb(255, 255, 255)\",\n  \"computedBackground\": \"rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box\",\n  \"computedBackgroundColor\": \"rgb(255, 255, 255)\",\n  \"position\": \"fixed\",\n  \"top\": \"0px\",\n  \"left\": \"0px\",\n  \"width\": \"375px\",\n  \"height\": \"80px\",\n  \"zIndex\": \"999999999\",\n  \"opacity\": \"1\",\n  \"visibility\": \"visible\",\n  \"pointerEvents\": \"none\",\n  \"boundingRect\": {\n    \"x\": 0,\n    \"y\": 0,\n    \"width\": 0,\n    \"height\": 0,\n    \"top\": 0,\n    \"right\": 0,\n    \"bottom\": 0,\n    \"left\": 0\n  }\n}\n"
+                      "text": "\n=== CUSTOM HAMBURGER ===\n"
                     },
                     {
-                      "text": "\n=== CLICKING HAMBURGER ===\n"
+                      "text": "{\n  \"exists\": true,\n  \"display\": \"flex\",\n  \"visibility\": \"visible\",\n  \"rect\": {\n    \"top\": 30,\n    \"right\": 345,\n    \"width\": 32,\n    \"height\": 32\n  }\n}\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] Menu toggled: OPEN\n"
+                      "text": "\n=== ALL VISIBLE ELEMENTS IN TOP-RIGHT (total: 11) ===\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] ✅ Showing cover rectangle\n"
+                      "text": "\n[0] html\n"
                     },
                     {
-                      "text": "\n=== AFTER CLICK ===\n"
+                      "text": "  Display: block\n"
                     },
                     {
-                      "text": "Rectangle after click: {\n  \"exists\": true,\n  \"inlineDisplay\": \"block\",\n  \"computedDisplay\": \"block\",\n  \"inlineBackground\": \"rgb(255, 255, 255)\",\n  \"computedBackground\": \"rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box\",\n  \"computedBackgroundColor\": \"rgb(255, 255, 255)\",\n  \"position\": \"fixed\",\n  \"top\": \"0px\",\n  \"left\": \"0px\",\n  \"width\": \"375px\",\n  \"height\": \"80px\",\n  \"zIndex\": \"999999999\",\n  \"opacity\": \"1\",\n  \"visibility\": \"visible\",\n  \"pointerEvents\": \"none\",\n  \"boundingRect\": {\n    \"x\": 0,\n    \"y\": 0,\n    \"width\": 375,\n    \"height\": 80,\n    \"top\": 0,\n    \"right\": 375,\n    \"bottom\": 80,\n    \"left\": 0\n  }\n}\n"
+                      "text": "  Position: static\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] Resize detected, viewport: 375\n"
+                      "text": "  Z-index: auto\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] Init called, viewport width: 375\n"
+                      "text": "  Rect: {\"top\":0,\"right\":375,\"width\":375,\"height\":18574}\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] Mobile viewport detected, setting up...\n"
+                      "text": "\n[1] body\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] Rectangle already created, skipping\n"
+                      "text": "  Display: block\n"
                     },
                     {
-                      "text": "BROWSER: [Mobile Logo Fix] Click detection already setup, skipping\n"
+                      "text": "  Position: static\n"
                     },
                     {
-                      "text": "\n=== MENU STATE ===\n"
+                      "text": "  Z-index: auto\n"
                     },
                     {
-                      "text": "[\n  {\n    \"name\": \"Nav section\",\n    \"width\": 375,\n    \"height\": 305,\n    \"display\": \"flex\",\n    \"opacity\": \"1\",\n    \"transform\": \"matrix(1, 0, 0, 1, -187.5, 0)\"\n  },\n  {\n    \"name\": \"Nav items\",\n    \"width\": 343,\n    \"height\": 124,\n    \"display\": \"flex\",\n    \"opacity\": \"1\",\n    \"transform\": \"none\"\n  },\n  {\n    \"name\": \"Nav item\",\n    \"width\": 46,\n    \"height\": 25,\n    \"display\": \"block\",\n    \"opacity\": \"1\",\n    \"transform\": \"none\"\n  },\n  {\n    \"name\": \"Nav item\",\n    \"width\": 83,\n    \"height\": 25,\n    \"display\": \"block\",\n    \"opacity\": \"1\",\n    \"transform\": \"none\"\n  }\n]\n"
+                      "text": "  Rect: {\"top\":0,\"right\":375,\"width\":375,\"height\":18574}\n"
+                    },
+                    {
+                      "text": "\n[2] div#main\n"
+                    },
+                    {
+                      "text": "  Display: block\n"
+                    },
+                    {
+                      "text": "  Position: static\n"
+                    },
+                    {
+                      "text": "  Z-index: auto\n"
+                    },
+                    {
+                      "text": "  Rect: {\"top\":0,\"right\":375,\"width\":375,\"height\":18574}\n"
+                    },
+                    {
+                      "text": "\n[3] div\n"
+                    },
+                    {
+                      "text": "  Display: flex\n"
+                    },
+                    {
+                      "text": "  Position: relative\n"
+                    },
+                    {
+                      "text": "  Z-index: auto\n"
+                    },
+                    {
+                      "text": "  Rect: {\"top\":0,\"right\":375,\"width\":375,\"height\":18574}\n"
+                    },
+                    {
+                      "text": "\n[4] section [Hero section]\n"
+                    },
+                    {
+                      "text": "  Display: flex\n"
+                    },
+                    {
+                      "text": "  Position: relative\n"
+                    },
+                    {
+                      "text": "  Z-index: auto\n"
+                    },
+                    {
+                      "text": "  Rect: {\"top\":0,\"right\":375,\"width\":375,\"height\":982}\n"
+                    },
+                    {
+                      "text": "\n[5] div [Container]\n"
+                    },
+                    {
+                      "text": "  Display: flex\n"
+                    },
+                    {
+                      "text": "  Position: relative\n"
+                    },
+                    {
+                      "text": "  Z-index: auto\n"
+                    },
+                    {
+                      "text": "  Rect: {\"top\":80,\"right\":359,\"width\":343,\"height\":902}\n"
+                    },
+                    {
+                      "text": "\n[6] div#custom-hamburger\n"
+                    },
+                    {
+                      "text": "  Display: flex\n"
+                    },
+                    {
+                      "text": "  Position: fixed\n"
+                    },
+                    {
+                      "text": "  Z-index: 2147483647\n"
+                    },
+                    {
+                      "text": "  Rect: {\"top\":30,\"right\":345,\"width\":32,\"height\":32}\n"
+                    },
+                    {
+                      "text": "\n[7] div\n"
+                    },
+                    {
+                      "text": "  Display: flex\n"
+                    },
+                    {
+                      "text": "  Position: static\n"
+                    },
+                    {
+                      "text": "  Z-index: auto\n"
+                    },
+                    {
+                      "text": "  Rect: {\"top\":34,\"right\":345,\"width\":32,\"height\":24}\n"
+                    },
+                    {
+                      "text": "\n[8] span\n"
+                    },
+                    {
+                      "text": "  Display: block\n"
+                    },
+                    {
+                      "text": "  Position: static\n"
+                    },
+                    {
+                      "text": "  Z-index: auto\n"
+                    },
+                    {
+                      "text": "  Rect: {\"top\":38,\"right\":345,\"width\":32,\"height\":2}\n"
+                    },
+                    {
+                      "text": "\n[9] span\n"
+                    },
+                    {
+                      "text": "  Display: block\n"
+                    },
+                    {
+                      "text": "  Position: static\n"
+                    },
+                    {
+                      "text": "  Z-index: auto\n"
+                    },
+                    {
+                      "text": "  Rect: {\"top\":45,\"right\":345,\"width\":24,\"height\":2}\n"
+                    },
+                    {
+                      "text": "\n[10] span\n"
+                    },
+                    {
+                      "text": "  Display: block\n"
+                    },
+                    {
+                      "text": "  Position: static\n"
+                    },
+                    {
+                      "text": "  Z-index: auto\n"
+                    },
+                    {
+                      "text": "  Rect: {\"top\":52,\"right\":345,\"width\":32,\"height\":2}\n"
                     }
                   ],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2025-10-02T10:34:51.363Z",
+                  "startTime": "2025-10-04T17:08:15.406Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -260,8 +392,8 @@
               "status": "expected"
             }
           ],
-          "id": "abaff7dd3f881c01b438-66ff18ea763a7f4dcab5",
-          "file": "manual-test-rectangle.spec.js",
+          "id": "2c5142f55e32c04c1fed-bbecb62382aaeab98eea",
+          "file": "test-real-browser.spec.js",
           "line": 3,
           "column": 1
         }
@@ -270,8 +402,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-10-02T10:34:51.130Z",
-    "duration": 12154.840999999999,
+    "startTime": "2025-10-04T17:08:15.154Z",
+    "duration": 5279.982,
     "expected": 1,
     "skipped": 0,
     "unexpected": 0,
